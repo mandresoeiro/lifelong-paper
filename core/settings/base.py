@@ -36,6 +36,7 @@ ALLOWED_HOSTS = []
 # APPLICATIONS
 # ==================================================
 
+
 DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -47,6 +48,9 @@ DJANGO_APPS = [
     "accounts",
     "profiles",
     "papers",
+    "devroadmap",
+    "projetos",
+    "cursos",
 ]
 
 PROJECT_APPS = [

@@ -1,0 +1,77 @@
+{% extends 'visual/base_tailwind.html' %}
+{% load projeto_tags %}
+{% block title %}Meus Projetos{% endblock %}
+{% block content %}
+<div class="ml-56 p-8">
+    <div class="flex items-center gap-3 mb-6">
+        <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-tr from-blue-600 to-green-400 text-white text-2xl shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+        </span>
+        <h1 class="text-3xl font-bold">Meus Projetos</h1>
+        <a href="{% url 'projetos:create' %}" class="ml-auto bg-green-600 text-white px-4 py-2 rounded shadow hover:bg-green-700 transition">+ Novo Projeto</a>
+    </div>
+    <form method="get" class="mb-8 flex flex-wrap gap-4 items-end">
+        <div>
+            <label for="q" class="block text-xs text-gray-600 mb-1">Buscar</label>
+            <input type="text" name="q" id="q" value="{{ request.GET.q }}" placeholder="Nome, descrição ou tecnologia" class="border rounded px-3 py-2 w-56">
+        </div>
+        <div>
+            <label for="status" class="block text-xs text-gray-600 mb-1">Status</label>
+            <input type="text" name="status" id="status" value="{{ request.GET.status }}" placeholder="Ex: Em andamento" class="border rounded px-3 py-2 w-40">
+        </div>
+        <div>
+            <label for="tecnologia" class="block text-xs text-gray-600 mb-1">Tecnologia</label>
+            <input type="text" name="tecnologia" id="tecnologia" value="{{ request.GET.tecnologia }}" placeholder="Ex: Django" class="border rounded px-3 py-2 w-32">
+        </div>
+        <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded">Filtrar</button>
+        {% if request.GET.q or request.GET.status or request.GET.tecnologia %}
+        <a href="{% url 'projetos:list' %}" class="text-blue-600 ml-2">Limpar</a>
+        {% endif %}
+    </form>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for projeto in projetos %}
+        <div class="bg-white rounded-lg shadow p-5 flex flex-col border border-blue-100">
+            <a href="{% url 'projetos:detail' projeto.pk %}" class="font-semibold text-lg hover:text-blue-600">{{ projeto.nome }}</a>
+            <div class="text-xs text-gray-500 mb-2">Status: {{ projeto.status|default:'-' }}</div>
+            <div class="flex flex-wrap gap-1 mb-2">
+                {% for tec in projeto.tecnologias|split_tec %}
+                    <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs">{{ tec }}</span>
+                {% endfor %}
+            </div>
+            <div class="text-gray-700 text-sm mb-2">{{ projeto.descricao|truncatechars:120 }}</div>
+            <div class="mb-2">
+                <div class="flex justify-between text-xs text-gray-500 mb-1">
+                    <span>Progresso</span>
+                    <span>{{ projeto.progresso }}%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-3">
+                    <div class="bg-gradient-to-r from-blue-500 to-green-400 h-3 rounded-full transition-all duration-300" style="width: {{ projeto.progresso }}%;"></div>
+                </div>
+            </div>
+            <div class="flex gap-2 mt-auto">
+                <a href="{% url 'projetos:edit' projeto.pk %}" class="bg-yellow-400 text-gray-900 px-3 py-1 rounded hover:bg-yellow-500 transition text-xs">Editar</a>
+                <a href="{% url 'projetos:delete' projeto.pk %}" class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition text-xs">Excluir</a>
+                <div class="flex gap-1 ml-auto">
+                    {% if projeto.link %}
+                        <a href="{{ projeto.link }}" target="_blank" title="Site" class="text-blue-600 underline text-xs">🌐</a>
+                    {% endif %}
+                    {% if projeto.repo %}
+                        <a href="{{ projeto.repo }}" target="_blank" title="Repositório" class="text-gray-800 underline text-xs">📁</a>
+                    {% endif %}
+                    {% if projeto.demo %}
+                        <a href="{{ projeto.demo }}" target="_blank" title="Demonstração" class="text-green-700 underline text-xs">▶️</a>
+                    {% endif %}
+                    {% if projeto.docs %}
+                        <a href="{{ projeto.docs }}" target="_blank" title="Documentação" class="text-indigo-700 underline text-xs">📄</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-span-full text-gray-500">Nenhum projeto cadastrado.</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

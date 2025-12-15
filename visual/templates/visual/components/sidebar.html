@@ -1,0 +1,15 @@
+<aside class="w-56 bg-gray-900 text-white h-screen fixed top-0 left-0 p-8 flex flex-col">
+    <h2 class="text-xl font-bold mb-8">Menu</h2>
+    <nav>
+        <ul class="space-y-4">
+            <li><a href="{% url 'visual:dashboard' %}" class="hover:text-blue-400 transition">Dashboard</a></li>
+            <li><a href="{% url 'visual:checklist-list' %}" class="hover:text-blue-400 transition">Checklist</a></li>
+            <li><a href="{% url 'visual:ideia-list' %}" class="hover:text-blue-400 transition">Ideias</a></li>
+            <li><a href="{% url 'visual:logdiario-create' %}" class="hover:text-blue-400 transition">Registrar Dia</a></li>
+            <li><a href="{% url 'devroadmap:list' %}" class="bg-gradient-to-r from-blue-600 to-green-500 text-white px-3 py-2 rounded shadow hover:from-blue-700 hover:to-green-600 font-bold block text-center transition">Roadmap Dev 🚀</a></li>
+            <li><a href="{% url 'projetos:list' %}" class="bg-gradient-to-r from-green-500 to-blue-600 text-white px-3 py-2 rounded shadow hover:from-green-600 hover:to-blue-700 font-bold block text-center transition">Projetos 💡</a></li>
+            <li><a href="{% url 'cursos:list' %}" class="bg-gradient-to-r from-indigo-600 to-pink-500 text-white px-3 py-2 rounded shadow hover:from-indigo-700 hover:to-pink-600 font-bold block text-center transition flex items-center justify-center gap-2">Cursos <span class="text-lg">🎓</span></a></li>
+            <li><a href="{% url 'admin:index' %}" class="hover:text-blue-400 transition">Admin</a></li>
+        </ul>
+    </nav>
+</aside>

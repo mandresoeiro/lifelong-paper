@@ -1,0 +1,44 @@
+{% extends 'visual/base_tailwind.html' %}
+{% block title %}Painel Principal{% endblock %}
+{% block content %}
+    <div class="flex">
+        {% include 'visual/components/sidebar.html' %}
+        <main class="flex-1 ml-56 p-8">
+            <h1 class="text-3xl font-bold mb-6">Painel Principal</h1>
+            <div class="flex flex-wrap gap-8">
+                <div class="w-full md:w-1/3">
+                    {% include 'visual/components/professional_card.html' %}
+                </div>
+                <div class="flex-1 min-w-[320px]">
+                    <div class="flex flex-wrap gap-6">
+                        <div class="bg-white rounded-lg shadow p-6 min-w-[180px]">
+                            <h4 class="font-semibold">Resumo do Dia</h4>
+                            <p>{{ resumo_dia|default:'Sem dados.' }}</p>
+                        </div>
+                        <div class="bg-white rounded-lg shadow p-6 min-w-[180px]">
+                            <h4 class="font-semibold">Data Atual</h4>
+                            <p>{{ data_atual|date:'d/m/Y' }}</p>
+                        </div>
+                        <div class="bg-white rounded-lg shadow p-6 min-w-[180px]">
+                            <h4 class="font-semibold">Frase/Nota do Dia</h4>
+                            <p>{{ frase_dia|default:'Tenha um ótimo dia!' }}</p>
+                        </div>
+                        <div class="bg-white rounded-lg shadow p-6 min-w-[180px]">
+                            <h4 class="font-semibold">Tarefas</h4>
+                            <p>{{ tarefas_count|default:0 }}</p>
+                        </div>
+                        <div class="bg-white rounded-lg shadow p-6 min-w-[180px]">
+                            <h4 class="font-semibold">Notas</h4>
+                            <p>{{ notas_count|default:0 }}</p>
+                        </div>
+                        <div class="bg-white rounded-lg shadow p-6 min-w-[180px]">
+                            <h4 class="font-semibold">Checklists</h4>
+                            <p>{{ checklists_count|default:0 }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="mt-10">Bem-vindo ao seu painel!</p>
+        </main>
+    </div>
+{% endblock %}

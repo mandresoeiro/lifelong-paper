@@ -1,0 +1,43 @@
+{% extends 'visual/base_tailwind.html' %}
+{% block title %}Meus Cursos{% endblock %}
+{% block content %}
+<div class="ml-56 p-8">
+    <div class="flex items-center gap-3 mb-6">
+        <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-tr from-indigo-600 to-pink-400 text-white text-2xl shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+        </span>
+        <h1 class="text-3xl font-bold">Meus Cursos</h1>
+        <a href="{% url 'cursos:create' %}" class="ml-auto bg-pink-600 text-white px-4 py-2 rounded shadow hover:bg-pink-700 transition">+ Novo Curso</a>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for curso in cursos %}
+        <div class="bg-white rounded-lg shadow p-5 flex flex-col border border-indigo-100 hover:shadow-xl transition">
+            <a href="{% url 'cursos:detail' curso.pk %}" class="font-semibold text-lg hover:text-indigo-600 flex items-center gap-2">
+                <span class="w-12 h-12 flex items-center justify-center bg-indigo-100 text-indigo-600 rounded shadow">🎓</span>
+                {{ curso.nome }}
+            </a>
+            <div class="text-xs text-gray-500 mb-1">{{ curso.plataforma|default:'-' }} | Instrutor: {{ curso.instrutor|default:'-' }}</div>
+            <div class="text-gray-700 text-sm mb-2">{{ curso.descricao|truncatechars:100 }}</div>
+            <div class="mb-2">
+                <div class="flex justify-between text-xs text-gray-500 mb-1">
+                    <span>Progresso</span>
+                    <span>{{ curso.progresso }}%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-3">
+                    <div class="bg-gradient-to-r from-indigo-500 to-pink-400 h-3 rounded-full transition-all duration-300" style="width: {{ curso.progresso }}%;"></div>
+                </div>
+            </div>
+            <div class="flex gap-2 mt-auto">
+                <a href="{% url 'cursos:edit' curso.pk %}" class="bg-yellow-400 text-gray-900 px-3 py-1 rounded hover:bg-yellow-500 transition text-xs">Editar</a>
+                <a href="{% url 'cursos:delete' curso.pk %}" class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition text-xs">Excluir</a>
+                {% if curso.url %}<a href="{{ curso.url }}" target="_blank" class="text-indigo-600 underline text-xs ml-auto">Ver Curso</a>{% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-span-full text-gray-500">Nenhum curso cadastrado.</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

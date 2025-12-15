@@ -1,0 +1,60 @@
+{% extends 'visual/base_tailwind.html' %}
+{% load form_extras %}
+{% block title %}Nova Entrada Roadmap{% endblock %}
+{% block content %}
+<div class="ml-56 p-8 max-w-2xl">
+    <div class="flex items-center gap-3 mb-6">
+        <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-tr from-blue-600 to-green-400 text-white text-2xl shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+        </span>
+        <h1 class="text-3xl font-bold">Nova Entrada</h1>
+    </div>
+    <form method="post" class="bg-white rounded-xl shadow-lg p-8 flex flex-col gap-6 border border-blue-100">
+        {% csrf_token %}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <label for="id_title" class="block font-semibold text-gray-700 mb-1">Título <span class="text-red-500">*</span></label>
+                {{ form.title|add_class:'w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-400' }}
+            </div>
+            <div>
+                <label for="id_tipo" class="block font-semibold text-gray-700 mb-1">Tipo <span class="text-red-500">*</span></label>
+                {{ form.tipo|add_class:'w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-400' }}
+            </div>
+            <div>
+                <label for="id_language" class="block font-semibold text-gray-700 mb-1">Linguagem</label>
+                {{ form.language|add_class:'w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-400' }}
+                <p class="text-xs text-gray-500 mt-1">Ex: python, bash, js</p>
+            </div>
+            <div>
+                <label for="id_tags" class="block font-semibold text-gray-700 mb-1">Tags</label>
+                {{ form.tags|add_class:'w-full border rounded px-3 py-2 focus:ring-2 focus:ring-blue-400' }}
+                <p class="text-xs text-gray-500 mt-1">Separe por vírgula</p>
+            </div>
+        </div>
+        <div>
+            <label for="id_code" class="block font-semibold text-gray-700 mb-1">Código / Script</label>
+            {{ form.code|add_class:'w-full font-mono border rounded px-3 py-2 min-h-[120px] bg-gray-50 focus:ring-2 focus:ring-blue-400' }}
+        </div>
+        <div>
+            <label for="id_description" class="block font-semibold text-gray-700 mb-1">Descrição</label>
+            {{ form.description|add_class:'w-full border rounded px-3 py-2 min-h-[80px] focus:ring-2 focus:ring-blue-400' }}
+        </div>
+        <div class="flex gap-6 items-center">
+            <label class="inline-flex items-center gap-2 cursor-pointer">
+                {{ form.is_favorite }}
+                <span class="text-yellow-500">★</span> Favorito
+            </label>
+            <label class="inline-flex items-center gap-2 cursor-pointer">
+                {{ form.reused }}
+                <span class="text-green-600">♻️</span> Reaproveitado
+            </label>
+        </div>
+        <div class="flex gap-4 mt-4">
+            <button type="submit" class="bg-blue-600 text-white px-8 py-2 rounded hover:bg-blue-700 transition text-lg font-semibold">Salvar</button>
+            <a href="{% url 'devroadmap:list' %}" class="text-blue-600 mt-2">Voltar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

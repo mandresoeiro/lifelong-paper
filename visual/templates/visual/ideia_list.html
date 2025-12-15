@@ -1,0 +1,9 @@
+<h2>Área de Ideias</h2>
+<ul>
+    {% for ideia in ideias %}
+        <li>{{ ideia.texto }}</li>
+    {% empty %}
+        <li>Nenhuma ideia registrada.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'visual:ideia-create' %}">Nova ideia</a>

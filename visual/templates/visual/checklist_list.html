@@ -1,0 +1,9 @@
+<h2>Checklist Diário</h2>
+<ul>
+    {% for item in checklist %}
+        <li>{% if item.done %}✅{% else %}⬜{% endif %} {{ item.description }}</li>
+    {% empty %}
+        <li>Nenhuma tarefa para hoje.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'visual:checklist-create' %}">Adicionar tarefa</a>

@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import ChecklistItem, LogDiario, Ideia
 
-# Register your models here.
+admin.site.register(ChecklistItem)
+admin.site.register(LogDiario)
+admin.site.register(Ideia)

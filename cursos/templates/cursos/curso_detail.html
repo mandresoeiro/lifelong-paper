@@ -1,0 +1,38 @@
+{% extends 'visual/base_tailwind.html' %}
+{% block title %}{{ curso.nome }}{% endblock %}
+{% block content %}
+<div class="ml-56 p-8 max-w-3xl">
+    <div class="bg-white rounded-lg shadow p-8 border border-indigo-100">
+        <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs px-2 py-1 rounded bg-gray-200 text-gray-700">{{ curso.plataforma|default:'-' }}</span>
+            <span class="text-xs px-2 py-1 rounded bg-pink-100 text-pink-700">{{ curso.criado_em|date:'d/m/Y' }}</span>
+        </div>
+        <div class="flex items-center gap-4 mb-4">
+            <span class="w-20 h-20 flex items-center justify-center bg-indigo-100 text-indigo-600 rounded shadow text-3xl">🎓</span>
+            <div>
+                <h1 class="text-2xl font-bold mb-1">{{ curso.nome }}</h1>
+                <div class="text-sm text-gray-600">Instrutor: {{ curso.instrutor|default:'-' }}</div>
+            </div>
+        </div>
+        <div class="mb-4 text-gray-700">{{ curso.descricao }}</div>
+        <div class="mb-4">
+            <div class="flex justify-between text-xs text-gray-500 mb-1">
+                <span>Progresso</span>
+                <span>{{ curso.progresso }}%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3">
+                <div class="bg-gradient-to-r from-indigo-500 to-pink-400 h-3 rounded-full transition-all duration-300" style="width: {{ curso.progresso }}%;"></div>
+            </div>
+        </div>
+        {% if curso.url %}
+        <div class="mb-4"><a href="{{ curso.url }}" target="_blank" class="text-indigo-600 underline">Ver Curso</a></div>
+        {% endif %}
+        <div class="flex gap-4 mt-6">
+            <a href="{% url 'cursos:edit' curso.pk %}" class="bg-yellow-400 text-gray-900 px-4 py-2 rounded hover:bg-yellow-500 transition">Editar</a>
+            <a href="{% url 'cursos:delete' curso.pk %}" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">Excluir</a>
+            <a href="{% url 'cursos:list' %}" class="text-indigo-600 ml-auto">Voltar</a>
+        </div>
+    </div>
+    <!-- Aulas podem ser listadas aqui futuramente -->
+</div>
+{% endblock %}
