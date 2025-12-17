@@ -1,0 +1,134 @@
+{
+  "item": [
+    {
+      "name": "📄 Papers CRUD",
+      "item": [
+        {
+          "name": "GET — Listar Papers",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/papers/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "papers", ""]
+            }
+          }
+        },
+        {
+          "name": "POST — Criar Paper",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Paper de Estudo\",\n  \"descricao\": \"Criado via Postman\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/papers/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "papers", ""]
+            }
+          }
+        },
+        {
+          "name": "PUT — Atualizar Paper",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Paper atualizado\",\n  \"descricao\": \"Alteração feita via Postman\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/papers/1/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "papers", "1", ""]
+            }
+          }
+        },
+        {
+          "name": "DELETE — Deletar Paper",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/api/papers/1/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "papers", "1", ""]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🧭 DevRoadmap CRUD",
+      "item": [
+        {
+          "name": "GET — Listar Roadmaps",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/devroadmap/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "devroadmap", ""]
+            }
+          }
+        },
+        {
+          "name": "POST — Criar Roadmap",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Novo roadmap\",\n  \"descricao\": \"Criado via Postman\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/devroadmap/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "devroadmap", ""]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🎓 Cursos CRUD",
+      "item": [
+        {
+          "name": "GET — Listar Cursos",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/cursos/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cursos", ""]
+            }
+          }
+        },
+        {
+          "name": "POST — Criar Curso",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Curso Django + React\",\n  \"descricao\": \"Criado via Postman\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/cursos/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cursos", ""]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    }
+  ]
+}

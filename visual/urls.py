@@ -6,7 +6,7 @@ from .views import (
     IdeiaListView, IdeiaCreateView,
 )
 
-app_name = "visual"
+
 
 urlpatterns = [
     path("", DashboardView.as_view(), name="dashboard"),

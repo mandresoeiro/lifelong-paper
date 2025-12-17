@@ -1,0 +1,196 @@
+{
+  "info": {
+    "_postman_id": "soeirotech-clean-golden-api",
+    "name": "SoeiroTech Clean Golden™ — API",
+    "description": "Coleção completa da API Django REST — Lifelong Paper Project.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "🧭 Health Check",
+      "item": [
+        {
+          "name": "GET — API Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/status/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "status", ""]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📋 Tasks CRUD",
+      "item": [
+        {
+          "name": "GET — Listar Tarefas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/tarefas/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tarefas", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST — Criar Tarefa",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Nova tarefa\",\n  \"descricao\": \"Criada via Postman\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/tarefas/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tarefas", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT — Atualizar Tarefa",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Tarefa atualizada\",\n  \"descricao\": \"Atualização via Postman\",\n  \"concluido\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/tarefas/1/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tarefas", "1", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE — Deletar Tarefa",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/tarefas/1/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tarefas", "1", ""]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "💼 Projects CRUD",
+      "item": [
+        {
+          "name": "GET — Listar Projetos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/projetos/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projetos", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST — Criar Projeto",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Novo projeto\",\n  \"descricao\": \"Criado via Postman\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/projetos/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projetos", ""]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📄 Papers CRUD",
+      "item": [
+        {
+          "name": "GET — Listar Papers",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/papers/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "papers", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST — Criar Paper",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Paper de Estudo\",\n  \"descricao\": \"Criado via Postman\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/papers/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "papers", ""]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🎓 Cursos CRUD",
+      "item": [
+        {
+          "name": "GET — Listar Cursos",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/cursos/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cursos", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST — Criar Curso",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Curso Django + React\",\n  \"descricao\": \"Criado via Postman\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/cursos/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cursos", ""]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "info": {
+    "_postman_id": "soeirotech-clean-golden-api-v2",
+    "name": "SoeiroTech Clean Golden™ — API v2",
+    "description": "Coleção completa da API Django REST — com ambientes Local e Production.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "🧭 Health Check",
+      "item": [
+        {
+          "name": "GET — API Status",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/status/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "status", ""]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "📋 Tasks CRUD",
+      "item": [
+        {
+          "name": "GET — Listar Tarefas",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/tarefas/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tarefas", ""]
+            }
+          }
+        },
+        {
+          "name": "POST — Criar Tarefa",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Nova tarefa\",\n  \"descricao\": \"Criada via Postman\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/tarefas/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tarefas", ""]
+            }
+          }
+        },
+        {
+          "name": "PUT — Atualizar Tarefa",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Tarefa atualizada\",\n  \"descricao\": \"Atualizada via Postman\",\n  \"concluido\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/tarefas/1/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tarefas", "1", ""]
+            }
+          }
+        },
+        {
+          "name": "DELETE — Deletar Tarefa",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/api/tarefas/1/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "tarefas", "1", ""]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "💼 Projects CRUD",
+      "item": [
+        {
+          "name": "GET — Listar Projetos",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/projetos/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projetos", ""]
+            }
+          }
+        },
+        {
+          "name": "POST — Criar Projeto",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Novo projeto\",\n  \"descricao\": \"Criado via Postman\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/projetos/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projetos", ""]
+            }
+          }
+        },
+        {
+          "name": "PUT — Atualizar Projeto",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Projeto atualizado\",\n  \"descricao\": \"Alteração feita via Postman\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/projetos/1/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projetos", "1", ""]
+            }
+          }
+        },
+        {
+          "name": "DELETE — Deletar Projeto",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/api/projetos/1/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "projetos", "1", ""]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

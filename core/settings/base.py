@@ -19,6 +19,9 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
+# Diretório onde o build React está localizado
+REACT_BUILD_DIR = BASE_DIR / "frontend" / "build"
+
 # ==================================================
 # CORE SETTINGS
 # ==================================================
@@ -30,6 +33,8 @@ SECRET_KEY = "dev-insecure-key-change-later"
 DEBUG = False  # DEV define isso no dev.py
 
 ALLOWED_HOSTS = []
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 # ==================================================
@@ -51,6 +56,10 @@ DJANGO_APPS = [
     "devroadmap",
     "projetos",
     "cursos",
+    "corsheaders",
+    "tasks",
+    "rest_framework",  # se já não tiver, vamos usar DRF
+    "rest_framework_simplejwt"
 ]
 
 PROJECT_APPS = [
@@ -76,6 +85,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     # 🔴 Produção:
     # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -102,10 +112,7 @@ ASGI_APPLICATION = "core.asgi.application"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        # Templates globais
-        "DIRS": [
-            BASE_DIR / "templates",
-        ],
+        "DIRS": [REACT_BUILD_DIR],  # ← permite que Django encontre o index.html do React
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -183,13 +190,21 @@ STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
+    REACT_BUILD_DIR / "static",
 ]
 
-# 🔴 PRODUÇÃO:
-# STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+STATICFILES_DIRS = [
+    REACT_BUILD_DIR / "static",
+]
+
+# Diretório padrão de arquivos estáticos (collectstatic)
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 
 
 # ==================================================

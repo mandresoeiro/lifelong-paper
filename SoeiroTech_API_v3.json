@@ -1,0 +1,160 @@
+{
+  "info": {
+    "_postman_id": "soeirotech-api-v3",
+    "name": "SoeiroTech Clean Golden™ — API v3",
+    "description": "Coleção Postman automatizada com variáveis dinâmicas, autenticação JWT e testes automáticos.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8000" },
+    { "key": "auth_token", "value": "" },
+    { "key": "task_id", "value": "" },
+    { "key": "user_email", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "🧭 Health Check",
+      "item": [
+        {
+          "name": "GET — API Status",
+          "request": { "method": "GET", "url": "{{base_url}}/api/status/" },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status da API OK', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "  pm.expect(pm.response.text()).to.include('OK');",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "🔐 Auth",
+      "item": [
+        {
+          "name": "POST — Login (obter token JWT)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{user_email}}\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": "{{base_url}}/api/token/"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "pm.test('Login retornou token', () => { pm.expect(res.access).to.exist; });",
+                  "pm.environment.set('auth_token', res.access);",
+                  "pm.environment.set('refresh_token', res.refresh);"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "👤 Usuários",
+      "item": [
+        {
+          "name": "POST — Criar Usuário",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@soeirotech.com\",\n  \"password\": \"123456\",\n  \"nome\": \"Admin Soeiro\"\n}"
+            },
+            "url": "{{base_url}}/api/usuarios/"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const user = pm.response.json();",
+                  "pm.test('Usuário criado com sucesso', () => pm.expect(pm.response.code).to.be.oneOf([200,201]));",
+                  "pm.environment.set('user_email', user.email);"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "📋 Tasks CRUD",
+      "item": [
+        {
+          "name": "POST — Criar Tarefa",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Tarefa automática\",\n  \"descricao\": \"Gerada via Postman v3\"\n}"
+            },
+            "url": "{{base_url}}/api/tarefas/"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const task = pm.response.json();",
+                  "pm.test('Tarefa criada com sucesso', () => pm.expect(pm.response.code).to.be.oneOf([200,201]));",
+                  "pm.environment.set('task_id', task.id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "GET — Listar Tarefas",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{auth_token}}" }],
+            "url": "{{base_url}}/api/tarefas/"
+          }
+        },
+        {
+          "name": "PUT — Atualizar Tarefa",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{auth_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Atualizada via Postman v3\",\n  \"descricao\": \"Testando variáveis dinâmicas\"\n}"
+            },
+            "url": "{{base_url}}/api/tarefas/{{task_id}}/"
+          }
+        },
+        {
+          "name": "DELETE — Deletar Tarefa",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{auth_token}}" }],
+            "url": "{{base_url}}/api/tarefas/{{task_id}}/"
+          }
+        }
+      ]
+    }
+  ]
+}
